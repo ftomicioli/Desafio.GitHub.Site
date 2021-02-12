@@ -7,12 +7,24 @@
 
     var filtroRealizado = (bool)ViewData["FiltroRealizado"];
 
-    List<RepositorioRetornoDto> repositorios = filtroRealizado 
-        ? (ViewData["RepositoriosFiltrados"] as List<RepositorioRetornoDto>) 
+    List<RepositorioRetornoDto> repositorios = filtroRealizado
+        ? (ViewData["RepositoriosFiltrados"] as List<RepositorioRetornoDto>)
         : (Session["Repositorios"] as List<RepositorioRetornoDto>);
 }
 
-<h1>Desafio GitHub do Tormi</h1>
+<h1>Desafio GitHub do "Tormi" S2</h1>
+Chefe e chefinho...
+<br />
+<br />
+
+Pelo tempo, cobri de testes unitários apenas um método da camada de serviços da api. Mas cobri ele por COMPLETO. Se alguem mexer no método quebra os testes
+<br />
+Não tive tempo pra caprichar no site
+
+<br />
+<br />
+
+Foi bom programar na madrugada de novo! Já fazia tempo :)
 
 <br />
 
@@ -27,7 +39,7 @@
             <button type="submit" class="btn btn-primary">Pesquisar</button>
         </div>
         <div class="col-md-6">
-            
+
         </div>
     </div>
 
