@@ -1,0 +1,40 @@
+﻿@using Desafio.GitHub.Site.Models;
+
+@{
+    ViewBag.Title = "Home Page";
+
+    ListarRepositoriosFavoritadosRetornoDto retornoFavoritos = (ViewData["Favoritos"] as ListarRepositoriosFavoritadosRetornoDto);
+}
+
+<h1>Favoritos</h1>
+
+<br />
+
+<br />
+
+@if (retornoFavoritos.Erro)
+{
+    <h2 style="color:red">@retornoFavoritos.MensagemErro</h2>
+}
+else
+{
+    if (retornoFavoritos.RepositoriosFavoritados == null || retornoFavoritos.RepositoriosFavoritados.Count == 0)
+    {
+        <h2 >Não existem repositórios favoritados</h2>
+    }
+
+    foreach (var repositorio in retornoFavoritos.RepositoriosFavoritados)
+    {
+        <div class="row">
+            <div class="col-md-6">
+                @repositorio.Name
+            </div>
+            <div class="col-md-6">
+                @Html.ActionLink("Desfavoritar", "Desfavoritar", "Home", new { id = repositorio.Id }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+
+        <br />
+    }
+}
+

@@ -1,0 +1,26 @@
+﻿@using Desafio.GitHub.Site.Models;
+
+@{
+    ViewBag.Title = "Favoritar";
+
+    var retornoFavoritar = (ViewData["Favoritar"] as FavoritarRepositorioRetornoDto);
+}
+
+<h1>Favoritar</h1>
+
+<br />
+
+<br />
+
+@if (retornoFavoritar.Erro)
+{
+    <h2 style="color:red">@retornoFavoritar.MensagemErro</h2>
+}
+else
+{
+    <h2>Repositório favoritado com sucesso</h2>
+}
+
+<br />
+
+<a href='javascript:history.go(-1)' class="btn btn-primary">Voltar</a>

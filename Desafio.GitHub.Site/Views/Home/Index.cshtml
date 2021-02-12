@@ -1,0 +1,27 @@
+﻿@using Desafio.GitHub.Site.Models;
+
+@{
+    ViewBag.Title = "Home Page";
+
+    List<RepositorioRetornoDto> repositorios = (ViewData["Repositorios"] as List<RepositorioRetornoDto>);
+}
+
+<h1>Desafio GitHub do Tormi</h1>
+
+<br />
+
+<br />
+
+@foreach (var repositorio in repositorios)
+{
+    <div class="row">
+        <div class="col-md-6">
+            @repositorio.Name
+        </div>
+        <div class="col-md-6">
+            @Html.ActionLink("Favoritar", "Favoritar", "Home", new { id = repositorio.Id }, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+
+    <br />
+}

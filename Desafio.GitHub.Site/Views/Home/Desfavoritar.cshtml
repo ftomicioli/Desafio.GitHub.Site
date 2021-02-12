@@ -1,0 +1,22 @@
+﻿@using Desafio.GitHub.Site.Models;
+
+@{
+    ViewBag.Title = "Desfavoritar";
+
+    var retornoDesfavoritar = (ViewData["Desfavoritar"] as DesfavoritarRepositorioRetornoDto);
+}
+
+<h1>Desfavoritar</h1>
+
+<br />
+
+<br />
+
+@if (retornoDesfavoritar.Erro)
+{
+    <h2 style="color:red">@retornoDesfavoritar.MensagemErro</h2>
+}
+else
+{
+    <h2>Repositório Desfavoritado com sucesso</h2>
+}
