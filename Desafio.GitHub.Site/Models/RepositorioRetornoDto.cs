@@ -9,5 +9,9 @@ namespace Desafio.GitHub.Site.Models
     {
         public long Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
+        public string Language { get; set; }
+        public DateTime Updated_At { get; set; }
+        public string Dono { get; set; }
     }
 }

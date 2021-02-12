@@ -176,6 +176,7 @@
     <Content Include="Views\Home\Favoritar.cshtml" />
     <Content Include="Views\Home\Favoritos.cshtml" />
     <Content Include="Views\Home\Desfavoritar.cshtml" />
+    <Content Include="Views\Home\Detalhar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

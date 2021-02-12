@@ -12,14 +12,34 @@ namespace Desafio.GitHub.Site.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(RepositorioRetornoDto model)
         {
-            ListarRepositoriosRetornoDto result = HttpHelper<ListarRepositoriosRetornoDto>.HttpRequest($"https://localhost:44388/api/v1/Repositorios/ListarRepositorios", method: CustomHttpVerbs.Get);
+            if(model.Name != null)
+            {
+                List<RepositorioRetornoDto> repositorios = (Session["Repositorios"] as List<RepositorioRetornoDto>);
 
-            ViewData["Repositorios"] = result.repositorios;
+                ViewData["RepositoriosFiltrados"] = repositorios.Where(p => p.Name.ToUpper().Contains(model.Name.ToUpper())).ToList();
+                ViewData["FiltroRealizado"] = true;
+            }
+            else
+            {
+                RestClient _proxyContaCorrente = new RestClient($"https://localhost:44388/api/v1/Repositorios/ListarRepositorios");
+                var request = new RestRequest(Method.GET);
+                IRestResponse<ListarRepositoriosRetornoDto> response = _proxyContaCorrente.Execute<ListarRepositoriosRetornoDto>(request);
+
+                Session["Repositorios"] = JsonConvert.DeserializeObject<ListarRepositoriosRetornoDto>(response.Content).repositorios;
+                ViewData["FiltroRealizado"] = false;
+            }
 
             return View();
         }
+
+        //public ActionResult Index(RepositorioRetornoDto model)
+        //{
+
+
+        //    return View();
+        //}
 
         public ActionResult Favoritar(long id)
         {
@@ -50,6 +70,15 @@ namespace Desafio.GitHub.Site.Controllers
             IRestResponse<DesfavoritarRepositorioRetornoDto> response = _proxyContaCorrente.Execute<DesfavoritarRepositorioRetornoDto>(request);
 
             ViewData["Desfavoritar"] = JsonConvert.DeserializeObject<DesfavoritarRepositorioRetornoDto>(response.Content);
+
+            return View();
+        }
+
+        public ActionResult Detalhar(long id)
+        {
+            var repositorio = (Session["Repositorios"] as List<RepositorioRetornoDto>).Where(p => p.Id == id).FirstOrDefault();
+
+            ViewData["Repositorio"] = repositorio;
 
             return View();
         }

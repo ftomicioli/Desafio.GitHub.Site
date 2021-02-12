@@ -1,9 +1,15 @@
 ﻿@using Desafio.GitHub.Site.Models;
 
+@model RepositorioRetornoDto
+
 @{
     ViewBag.Title = "Home Page";
 
-    List<RepositorioRetornoDto> repositorios = (ViewData["Repositorios"] as List<RepositorioRetornoDto>);
+    var filtroRealizado = (bool)ViewData["FiltroRealizado"];
+
+    List<RepositorioRetornoDto> repositorios = filtroRealizado 
+        ? (ViewData["RepositoriosFiltrados"] as List<RepositorioRetornoDto>) 
+        : (Session["Repositorios"] as List<RepositorioRetornoDto>);
 }
 
 <h1>Desafio GitHub do Tormi</h1>
@@ -12,11 +18,27 @@
 
 <br />
 
+@using (Html.BeginForm("Index", "Home"))
+{
+    <div class="row">
+        <div class="col-md-6">
+            @Html.TextBoxFor(model => model.Name)
+
+            <button type="submit" class="btn btn-primary">Pesquisar</button>
+        </div>
+        <div class="col-md-6">
+            
+        </div>
+    </div>
+
+    <br />
+}
+
 @foreach (var repositorio in repositorios)
 {
     <div class="row">
         <div class="col-md-6">
-            @repositorio.Name
+            @Html.ActionLink(@repositorio.Name, "Detalhar", "Home", new { id = repositorio.Id }, new { @class = "" })
         </div>
         <div class="col-md-6">
             @Html.ActionLink("Favoritar", "Favoritar", "Home", new { id = repositorio.Id }, new { @class = "btn btn-primary" })

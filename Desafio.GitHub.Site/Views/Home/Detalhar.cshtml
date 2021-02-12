@@ -1,0 +1,72 @@
+﻿@using Desafio.GitHub.Site.Models;
+
+@{
+    ViewBag.Title = "Home Page";
+
+    RepositorioRetornoDto repositorio = (ViewData["Repositorio"] as RepositorioRetornoDto);
+}
+
+<h1>Detalhes</h1>
+
+<br />
+
+<br />
+
+<div class="row">
+    <div class="col-md-4">
+        Nome do repositório:
+    </div>
+    <div class="col-md-4">
+        @repositorio.Name
+    </div>
+</div>
+
+<br />
+
+<div class="row">
+    <div class="col-md-4">
+        Descrição:
+    </div>
+    <div class="col-md-4">
+        @repositorio.Description
+    </div>
+</div>
+
+<br />
+
+<div class="row">
+    <div class="col-md-4">
+        Linguagem
+    </div>
+    <div class="col-md-4">
+        @repositorio.Language
+    </div>
+</div>
+
+<br />
+
+<div class="row">
+    <div class="col-md-4">
+        Última atualização
+    </div>
+    <div class="col-md-4">
+        @repositorio.Updated_At
+    </div>
+</div>
+
+<br />
+
+<div class="row">
+    <div class="col-md-4">
+        Dono
+    </div>
+    <div class="col-md-4">
+        @repositorio.Dono
+    </div>
+</div>
+
+<br />
+
+@Html.ActionLink("Favoritar", "Favoritar", "Home", new { id = repositorio.Id }, new { @class = "btn btn-primary" })
+
+<a href='javascript:history.go(-1)' class="btn btn-primary">Voltar</a>
